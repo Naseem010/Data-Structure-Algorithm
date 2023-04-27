@@ -21,15 +21,16 @@ class Solution {
             dis[i]=1e9;
         }
         dis[src]=0;
-        queue<int>q;
-        q.push(src);
+        queue<pair<int,int>>q;
+        q.push({src,0});
         while(!q.empty()){
-            int node=q.front();
+            int node=q.front().first;
+            int wt=q.front().second;
             q.pop();
             for(auto it:adj[node]){
-                if(dis[it]> dis[node]+1){
-                    dis[it]=dis[node]+1;
-                    q.push(it);
+                if(dis[it]> wt+1){
+                    dis[it]=wt+1;
+                    q.push({it,wt+1});
                 }
             }
         }
