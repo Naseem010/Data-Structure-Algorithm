@@ -25,7 +25,7 @@ class Solution {
             for(auto it:adj[node]){
                 int newnode=it.first;
                 int newcost=it.second;
-                if(cost[newnode]>newcost+costs && steps<=K){
+                if(cost[newnode]>newcost+costs){
                     cost[newnode]=newcost+costs;
                     q.push({steps+1,{newnode,newcost+costs}});
                     
