@@ -14,9 +14,8 @@ class Solution {
     */
     vector<int> bellman_ford(int V, vector<vector<int>>& edges, int S) {
         // Code here
-        vector<int>dis(V,1e8),cycle(1,-1);
+        vector<int>dis(V,1e8);
         dis[S]=0;
-        int mod=1e8;
         for(int i=0;i<V;i++){
             for(auto it:edges){
                 int u=it[0];
@@ -24,8 +23,8 @@ class Solution {
                 int wt=it[2];
                 if(wt+dis[u]<dis[v]){
                     dis[v]=(wt+dis[u]);
-                    if(i==V-1){
-                        return cycle;
+                    if(i==V-1){  
+                        return {-1};
                     }
                 }
             }
