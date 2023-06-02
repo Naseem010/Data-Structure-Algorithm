@@ -8,34 +8,35 @@ class Solution {
     int CheapestFLight(int n, vector<vector<int>>& flights, int src, int dst, int K)  {
         // Code here
         vector<pair<int,int>>adj[n];
-        
         for(auto it:flights){
             adj[it[0]].push_back({it[1],it[2]});
         }
-        queue<pair<int,pair<int,int>>>q;
-        q.push({0,{src,0}});
         vector<int>cost(n,1e9);
         cost[src]=0;
+        queue<pair<int,pair<int,int>>>q;
+        q.push({0,{src,0}});
         while(!q.empty()){
             int steps=q.front().first;
             int node=q.front().second.first;
             int costs=q.front().second.second;
             q.pop();
+            // if(node==dst && steps==K+1)return cost;
             if(steps>K)continue;
             for(auto it:adj[node]){
+                int ncost=it.second;
                 int newnode=it.first;
-                int newcost=it.second;
-                if(cost[newnode]>newcost+costs){
-                    cost[newnode]=newcost+costs;
-                    q.push({steps+1,{newnode,newcost+costs}});
+                if(cost[newnode]>costs+ncost){
                     
+                q.push({steps+1,{newnode,costs+ncost}});
+                cost[newnode]=costs+ncost;
                 }
-                
             }
         }
-        if(cost[dst]==1e9)return -1;
+        for(int i=0;i<n;i++){
+            if(cost[i]==1e9)cost[i]=-1;
+        }
         return cost[dst];
-    }
+}
 };
 
 //{ Driver Code Starts.
