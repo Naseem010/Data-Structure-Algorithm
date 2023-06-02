@@ -16,14 +16,14 @@ class Solution {
         // Code here
         vector<int>dis(V,1e8);
         dis[S]=0;
-        for(int i=0;i<V;i++){
+        for(int i=0;i<=V;i++){
             for(auto it:edges){
                 int u=it[0];
                 int v=it[1];
                 int wt=it[2];
                 if(wt+dis[u]<dis[v]){
                     dis[v]=(wt+dis[u]);
-                    if(i==V-1){  
+                    if(i==V){  
                         return {-1};
                     }
                 }
