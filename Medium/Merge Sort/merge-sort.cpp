@@ -44,9 +44,6 @@ class Solution
              temp.push_back(arr[right]);
                  right++;
          }
-        //  for(int i=0;i<temp.size();i++){
-        //      arr[i]=temp[i];
-        //  }
             for(int i=l;i<=r;i++){
             arr[i] = temp[i-l];
         }
