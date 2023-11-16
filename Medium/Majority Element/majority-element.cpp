@@ -17,37 +17,28 @@ class Solution{
     {
         
         // your code here
-          int votes = 1, candidate = a[0];
-
-         for (int i = 1; i < size; i++)
-         {
-            if (a[i] == candidate)
-            {
-               votes++;
+        int vote=1;
+        int candidate=a[0];
+        for(int i=1;i<size;i++){
+            if(a[i]==candidate){
+                vote++;
+            }else{
+                vote--;
+                if(vote==0){
+                    vote=1;
+                    candidate=a[i];
+                }
             }
-            else
-            {
-               votes--;
-
-               if (votes == 0)
-               {
-                  candidate = a[i];
-                  votes = 1;
-               }
+        }
+        int countCandidate=0;
+        for(int i=0;i<size;i++){
+            if(a[i]==candidate){
+                countCandidate++;
             }
-         }
-
-         int countVotesOfCandidate = 0;
-
-         for (int i = 0; i < size; i++)
-         {
-             if (a[i] == candidate)
-             {
-                countVotesOfCandidate++;
-             }
-         }
-
-         return countVotesOfCandidate > size / 2 ? candidate : -1;
+        }
+        if(countCandidate>size/2)return candidate;
+         return -1;
+        
     }
 };
 
