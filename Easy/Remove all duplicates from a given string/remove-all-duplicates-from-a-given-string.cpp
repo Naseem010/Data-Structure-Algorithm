@@ -9,17 +9,19 @@ using namespace std;
 class Solution{
 public:
 	string removeDuplicates(string str) {
-	   
-	   map<char,int>mp;
+	    // code here
+	    map<char,int>mp;
 	    string ans="";
-	   for(int i=0;i<str.size();i++){
-	       if(mp[str[i]]>=1){
-	           continue;
-	       }
-	       mp[str[i]]++;
-	     ans+=str[i];
-	   }
-	   return ans;
+	    for(int i=0;i<str.size();i++){
+	        if(mp[str[i]]<1){
+	            ans+=str[i];
+	        }
+	        mp[str[i]]++;
+	    }
+	   // for(auto it:mp){
+	   //     ans+=it.first;
+	   // }
+	    return ans;
 	}
 };
 
