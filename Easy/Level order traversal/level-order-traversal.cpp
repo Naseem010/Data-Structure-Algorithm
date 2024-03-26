@@ -45,24 +45,21 @@ class Solution
     vector<int> levelOrder(Node* root)
     {
       //Your code here
-        vector<int>Ans;
-    if(root==NULL)return Ans;
-
-queue<Node*>q;
-q.push(root);
-while(!q.empty()){
-    int n=q.size();
-    for(int i=0;i<n;i++){
-          
-    Node* newNode=q.front();
-    q.pop();
-    if(newNode->left!=NULL)q.push(newNode->left);
-    if(newNode->right!=NULL)q.push(newNode->right);
-    Ans.push_back(newNode->data);
-    }
-    
-}
-return Ans;
+      vector<int>ans;
+      if(root==NULL)return ans;
+      queue<Node*>q;
+      q.push(root);
+      while(!q.empty()){
+        //   int n=q.size();
+        //   for(int i=0;i<n;i++){
+          Node *newnode=q.front();
+          q.pop();
+          if(newnode->left)q.push(newnode->left);
+          if(newnode->right)q.push(newnode->right);
+          ans.push_back(newnode->data);
+        //   }
+      }
+      return ans;
     }
 };
 
