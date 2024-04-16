@@ -12,30 +12,27 @@
 class Solution {
 public:
     void solve(TreeNode*root,vector<vector<int>>&ans,vector<int>&res){
-  
-     
-     if(root==NULL){
-        return;
-     }  
-
-    
-    res.push_back(root->val);
-
-       // Check if we're at a leaf node
-        if (root->left == NULL && root->right == NULL) {
-            ans.push_back(res);
-        } else {
-            // Continue to explore left and right children
-            if (root->left) {
-                solve(root->left, ans, res);
-            }
-            if (root->right) {
-                solve(root->right, ans, res);
-            }
+   if (root == NULL) {
+            return;
         }
 
-    res.pop_back();
+        res.push_back(root->val);
 
+        // If leaf node, add the current path to the answer list
+        if (root->left == NULL && root->right == NULL) {
+            ans.push_back(res);
+        }
+
+        // Recursively process left and right children
+        if (root->left) {
+            solve(root->left, ans, res);
+        }
+        if (root->right) {
+            solve(root->right, ans, res);
+        }
+
+        // Backtrack
+        res.pop_back();
 
     }
     int sumNumbers(TreeNode* root) {
