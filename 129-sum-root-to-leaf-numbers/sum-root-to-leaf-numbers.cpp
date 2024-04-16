@@ -15,7 +15,7 @@ public:
         int sum=0;
         return dfs(root,sum);
     }
-    int left,right=0;
+   
     int dfs(TreeNode* node,int sum){
      if (!node)
             return 0;
@@ -25,6 +25,10 @@ public:
         if (!node->left && !node->right)
             return sum;
         
-        return dfs(node->left, sum) + dfs(node->right, sum);
+        // return dfs(node->left, sum) + dfs(node->right, sum);
+        int left=dfs(node->left,sum);
+        int right=dfs(node->right,sum);
+
+        return left+right;
     }
 };
