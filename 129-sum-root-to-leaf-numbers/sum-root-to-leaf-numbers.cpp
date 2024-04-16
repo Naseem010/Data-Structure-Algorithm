@@ -12,8 +12,8 @@
 class Solution {
 public:
     int sumNumbers(TreeNode* root) {
-        
-        return dfs(root,0);
+        int sum=0;
+        return dfs(root,sum);
     }
     int left,right=0;
     int dfs(TreeNode* node,int sum){
