@@ -11,24 +11,60 @@
  */
 class Solution {
 public:
-    int sumNumbers(TreeNode* root) {
-        int sum=0;
-        return dfs(root,sum);
-    }
-   
-    int dfs(TreeNode* node,int sum){
-     if (!node)
-            return 0;
-        
-        sum = sum * 10 + node->val;
-        
-        if (!node->left && !node->right)
-            return sum;
-        
-        // return dfs(node->left, sum) + dfs(node->right, sum);
-        int left=dfs(node->left,sum);
-        int right=dfs(node->right,sum);
+    void solve(TreeNode*root,vector<vector<int>>&ans,vector<int>&res){
+  
+     
+     if(root==NULL){
+        return;
+     }  
 
-        return left+right;
+    
+    res.push_back(root->val);
+
+       // Check if we're at a leaf node
+        if (root->left == NULL && root->right == NULL) {
+            ans.push_back(res);
+        } else {
+            // Continue to explore left and right children
+            if (root->left) {
+                solve(root->left, ans, res);
+            }
+            if (root->right) {
+                solve(root->right, ans, res);
+            }
+        }
+
+    res.pop_back();
+
+
     }
+    int sumNumbers(TreeNode* root) {
+        vector<int>res;
+        vector<vector<int>>ans;
+        solve(root,ans,res);
+        for(auto it:ans){
+            for(auto i:it){
+                cout<<i;
+            }
+            cout<<endl;
+        }
+        int wow=0;
+        vector<int>final;
+        for(auto i:ans){
+            wow=0;
+            for(auto it:i){
+              wow=wow*10+it;
+            }
+
+            final.push_back(wow);
+        }
+
+        int result=0;
+        for(auto i:final){
+            result+=i;
+        }
+
+        return result;
+    }
+    
 };
