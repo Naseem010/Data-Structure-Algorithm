@@ -11,46 +11,39 @@
 class Solution {
 public:
     ListNode* removeNodes(ListNode* head) {
-        // stack<ListNode*>st;
-        // ListNode* curr=head;
-        // ListNode* prev=nullptr;
-        // while(curr!=nullptr){
-        //     ListNode* temp=curr->next;
-        //     if(st.empty()){
-        //         st.push(curr);
-        //     }else{
-        //         while(!st.empty()){
-        //             ListNode* Top=st.top();
-        //             if(curr->val < Top->val){
-        //                 st.push(curr);
-        //                 break;
-        //             }else if(curr->val > Top->val){
-        //                 st.pop();
-        //             }
-        //         }
-        //         if(st.empty()){
-        //         st.push(curr);
-        //         }
-        //     }
-        //     curr=temp;
-        // }
-          ListNode* curr = head;
-        stack<ListNode*> st;
-        
+          ListNode *prev = nullptr, *curr = head;
         while (curr != nullptr) {
-            while (!st.empty() && st.top()->val < curr->val) {
-                st.pop();
+            ListNode* next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        ListNode* dummyHead = new ListNode(-1);
+        ListNode* tempPrev = dummyHead;
+        curr = prev;
+
+        while (curr != nullptr) {
+            if (curr->val >= tempPrev->val) {
+                tempPrev->next = curr;
+                tempPrev = curr;
+                curr = curr->next;
+            } else {
+                curr = curr->next;
             }
-            st.push(curr);
-            curr = curr->next;
         }
-        ListNode* nxt = nullptr;
-        while (!st.empty()) {
-            curr = st.top();
-            st.pop();
-            curr->next = nxt;
-            nxt = curr;
+        tempPrev->next = nullptr;
+
+        ListNode *newPrev = nullptr, *newCurr = dummyHead->next;
+        while (newCurr != nullptr) {
+            ListNode* next = newCurr->next;
+            newCurr->next = newPrev;
+            newPrev = newCurr;
+            newCurr = next;
+            // swap(newCurr->next, newPrev);
+            // swap(newPrev, newCurr);
         }
-        return nxt;
+
+        return newPrev;
     }
 };
