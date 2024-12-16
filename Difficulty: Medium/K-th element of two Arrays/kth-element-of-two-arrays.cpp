@@ -6,37 +6,37 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    int kthElement(int k, vector<int>& arr1, vector<int>& arr2) {
+    int kthElement(vector<int>& a, vector<int>& b, int k) {
         // code here
-        vector<int>arr;
-        int i=0,j=0;
-        int n1=arr1.size();
-        int n2=arr2.size();
-        while(i<n1 && j<n2){
-            if(arr1[i]>arr2[j]){
-                arr.push_back(arr2[j]);
-                j++;
-            }else if(arr1[i]<arr2[j]){
-                arr.push_back(arr1[i]);
-                i++;
-            }else{
-                arr.push_back(arr1[i]);
-                arr.push_back(arr2[j]);
-                i++;
-                j++;
-            }
-        }
-       while(i<n1){
-           arr.push_back(arr1[i]);
+        int n=a.size();
+        int m=b.size();
+        int i=0;
+        int j=0;
+       while(i<n && j<m){
+           if(a[i]<=b[j]){
+               i++;
+               k--;
+               if(k==0)return a[i-1];
+           }
+           else if(a[i]>b[j]){
+               j++;
+               k--;
+               if(k==0)return b[j-1];
+           }
+       }
+       while(i<n){
            i++;
+           k--;
+           if(k==0)return a[i-1];
        }
-       while(j<n2){
-           arr.push_back(arr2[j]);
+       while(j<m){
            j++;
+           k--;
+           if(k==0)return b[j-1];
        }
-       return arr[k-1];
     }
 };
+
 
 //{ Driver Code Starts.
 
@@ -51,22 +51,22 @@ int main() {
         cin.ignore();
         string input;
         int num;
-        vector<int> arr1, arr2;
+        vector<int> a, b;
 
         getline(cin, input);
         stringstream s2(input);
         while (s2 >> num) {
-            arr1.push_back(num);
+            a.push_back(num);
         }
 
         getline(cin, input);
         stringstream s3(input);
         while (s3 >> num) {
-            arr2.push_back(num);
+            b.push_back(num);
         }
 
         Solution ob;
-        cout << ob.kthElement(k, arr1, arr2) << endl;
+        cout << ob.kthElement(a, b, k) << endl << "~\n";
     }
     return 0;
 }
